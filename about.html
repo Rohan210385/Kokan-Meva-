@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - KokanMewa</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Merriweather", serif;
+        }
+
+        body {
+            background: #fffaf2;
+            color: #333;
+        }
+
+        nav {
+            background: black;
+            min-height: 80px;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav h2 {
+            color: orange;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color: orange;
+        }
+
+        .hero {
+            background: linear-gradient(120deg, #42220d, #bd651c);
+            color: white;
+            text-align: center;
+            padding: 75px 20px;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 17px;
+        }
+
+        .about-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .about-intro {
+            text-align: center;
+            margin-bottom: 35px;
+            line-height: 1.9;
+        }
+
+        .about-intro h2 {
+            color: #a64b0b;
+            margin-bottom: 15px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .about-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 5px solid #e88928;
+            box-shadow: 0 4px 12px #ddd;
+            line-height: 1.8;
+        }
+
+        .about-card h3 {
+            color: #a64b0b;
+            margin-bottom: 12px;
+        }
+
+        .about-card p {
+            font-size: 14px;
+        }
+
+        .highlight {
+            text-align: center;
+            background: #fff0d9;
+            padding: 35px 20px;
+            margin-top: 35px;
+            border-radius: 12px;
+        }
+
+        .highlight h2 {
+            color: #a64b0b;
+            margin-bottom: 12px;
+        }
+
+        footer {
+            background: black;
+            color: white;
+            text-align: center;
+            padding: 22px;
+            margin-top: 40px;
+        }
+
+        @media(max-width: 650px) {
+            nav {
+                justify-content: center;
+            }
+
+            nav ul {
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <h2>KokanMewa</h2>
+
+        <ul>
+            <li><a href="KokanMewa.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="login1.html">Login</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>About KokanMewa</h1>
+        <p>Bringing the Traditional Taste of Konkan to Your Home!</p>
+    </section>
+
+    <main class="about-container">
+
+        <section class="about-intro">
+            <h2>Welcome to KokanMewa</h2>
+            <p>
+                KokanMewa is an online shopping platform that brings
+                traditional Konkan food products and authentic flavours
+                to customers. Our aim is to make shopping for delicious
+                regional products easy and convenient.
+            </p>
+        </section>
+
+        <section class="about-grid">
+
+            <div class="about-card">
+                <h3>Who We Are</h3>
+                <p>
+                    KokanMewa is an ecommerce website focused on
+                    traditional Konkan products. We provide a platform
+                    where customers can explore and purchase different
+                    food products in one place.
+                </p>
+            </div>
+
+            <div class="about-card">
+                <h3>Our Mission</h3>
+                <p>
+                    Our mission is to introduce the traditional taste
+                    of Konkan to more people through a simple,
+                    user-friendly and convenient online shopping
+                    experience.
+                </p>
+            </div>
+
+            <div class="about-card">
+                <h3>Our Products</h3>
+                <p>
+                    We offer products such as cashews, Malvani kaju,
+                    modak flour, ghavan flour, vada flour, mango pulp,
+                    pickles, kokam juice, amla squash, jackfruit chips
+                    and traditional fruit poli.
+                </p>
+            </div>
+
+            <div class="about-card">
+                <h3>Why Choose KokanMewa?</h3>
+                <p>
+                    Customers can explore different products, view
+                    product details, check prices and add their
+                    favourite products to the shopping cart.
+                    Our website makes online shopping simple.
+                </p>
+            </div>
+
+        </section>
+
+        <section class="highlight">
+            <h2>Our Promise</h2>
+            <p>
+                Celebrating the taste, tradition and flavours
+                of Konkan with KokanMewa!
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 KokanMewa. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

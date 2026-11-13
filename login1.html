@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - KokanMewa</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #25160c, #a64b0b, #ed9b36);
+            padding: 20px;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 420px;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .login-box h1 {
+            text-align: center;
+            color: #a64b0b;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            height: 45px;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #d97716;
+            box-shadow: 0 0 5px #e8a45b;
+        }
+
+        .login-btn, .reset-btn {
+            width: 100%;
+            height: 45px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .login-btn {
+            background: #a64b0b;
+            color: white;
+        }
+
+        .login-btn:hover {
+            background: black;
+        }
+
+        .reset-btn {
+            background: #eee;
+            color: #333;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 22px;
+        }
+
+        .signup-link a {
+            color: #a64b0b;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <script>
+        function login(event) {
+            event.preventDefault();
+
+            let data = JSON.parse(
+                localStorage.getItem("registerusers")
+            ) || [];
+
+            let email = document.getElementById("usernameOrEmail").value;
+            let password = document.getElementById("password").value;
+
+            let result = data.find(function(user) {
+                return user.useremail === email &&
+                       user.userpassword === password;
+            });
+
+            if (result) {
+                alert("Login successful!");
+                window.location.href = "KokanMewa.html";
+            }
+            else {
+                alert("Invalid email or password. Please sign up first.");
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="login-box">
+
+        <h1>KokanMewa</h1>
+        <p class="subtitle">Welcome Back! Please Login</p>
+
+        <form onsubmit="login(event)">
+
+            <div class="form-group">
+                <label for="usernameOrEmail">Email Address</label>
+                <input type="email"
+                       id="usernameOrEmail"
+                       placeholder="Enter your email"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password"
+                       id="password"
+                       placeholder="Enter your password"
+                       pattern="^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{6,8}$"
+                       title="Password must contain uppercase, number, special character and be 6 to 8 characters long."
+                       required>
+            </div>
+
+            <button type="submit" class="login-btn">
+                Login
+            </button>
+
+            <button type="reset" class="reset-btn">
+                Reset
+            </button>
+
+            <div class="signup-link">
+                Don't have an account?
+                <a href="signup.html">Sign Up</a>
+            </div>
+
+        </form>
+
+    </div>
+
+</body>
+</html>
