@@ -341,8 +341,9 @@ function decreaseQty(productId){
     }
   function searchProduct(){
     console.log("hello");
+
    let  searchedText= document.getElementById("search").value;
-   console.log(searchedText);
+ 
    const filterProducts= products.filter(function(prod){
        return prod.name.toLowerCase().includes(searchedText.toLowerCase()) ;
     });
