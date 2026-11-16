@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout - KokanMewa</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #fffaf2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #ccc;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #a64b0b;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 7px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #a64b0b;
+            color: white;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 20px;
+            background: #a64b0b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: black;
+        }
+
+        #success {
+            display: none;
+            text-align: center;
+            color: green;
+            font-size: 22px;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>KokanMewa</h1>
+    <h2>Checkout</h2>
+
+    <h3>Order Summary</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+
+        <tbody id="orderDetails"></tbody>
+    </table>
+
+    <div class="total" id="grandTotal"></div>
+
+    <h2>Delivery Details</h2>
+
+    <form id="checkoutForm">
+
+        <label>Full Name</label>
+        <input type="text" id="customerName" required>
+
+        <label>Email Address</label>
+        <input type="email" id="customerEmail" required>
+
+        <label>Mobile Number</label>
+        <input type="tel" id="mobile"
+               pattern="[0-9]{10}"
+               maxlength="10" required>
+
+        <label>Delivery Address</label>
+        <textarea id="address" rows="4" required></textarea>
+
+        <label>Payment Method</label>
+        <select id="payment" required>
+            <option value="">Select Payment Method</option>
+            <option value="Cash on Delivery">Cash on Delivery</option>
+            <option value="Online Payment">Online Payment</option>
+        </select>
+
+        <button type="submit">Place Order</button>
+
+    </form>
+
+    <div id="success">
+        <h2>Order Placed Successfully!</h2>
+        <p>Thank you for shopping with KokanMewa.</p>
+        <p id="orderNumber"></p>
+        <button onclick="window.location.href='index.html'">
+            Continue Shopping
+        </button>
+    </div>
+
+</div>
+
+<script>
+
+    let cart = JSON.parse(
+        localStorage.getItem("kokanmewaCart")
+    ) || [];
+
+    let total = 0;
+
+    function displayOrder() {
+
+        const tbody = document.getElementById("orderDetails");
+
+        if (cart.length === 0) {
+            tbody.innerHTML =
+                "<tr><td colspan='4'>Your cart is empty</td></tr>";
+
+            document.getElementById("grandTotal")
+                .textContent = "Total: ₹0";
+
+            document.querySelector(
+                "#checkoutForm button"
+            ).disabled = true;
+
+            return;
+        }
+
+        tbody.innerHTML = "";
+        total = 0;
+
+        cart.forEach(function(item) {
+
+            let itemTotal = item.price * item.quantity;
+
+            total += itemTotal;
+
+            tbody.innerHTML += `
+                <tr>
+                    <td>${item.name}</td>
+                    <td>₹${item.price}</td>
+                    <td>${item.quantity}</td>
+                    <td>₹${itemTotal}</td>
+                </tr>
+            `;
+
+        });
+
+        document.getElementById("grandTotal")
+            .textContent = "Grand Total: ₹" + total;
+    }
+
+    displayOrder();
+
+    document.getElementById("checkoutForm")
+        .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        if (cart.length === 0) {
+            alert("Your cart is empty!");
+            return;
+        }
+
+        let orderId = "KM" + Date.now();
+
+        let order = {
+            orderId: orderId,
+            customerName:
+                document.getElementById("customerName").value,
+
+            email:
+                document.getElementById("customerEmail").value,
+
+            mobile:
+                document.getElementById("mobile").value,
+
+            address:
+                document.getElementById("address").value,
+
+            payment:
+                document.getElementById("payment").value,
+
+            products: cart,
+            totalAmount: total,
+            orderDate: new Date().toLocaleString()
+        };
+
+        // Save order
+        let orders = JSON.parse(
+            localStorage.getItem("kokanmewaOrders")
+        ) || [];
+
+        orders.push(order);
+
+        localStorage.setItem(
+            "kokanmewaOrders",
+            JSON.stringify(orders)
+        );
+
+        // Clear cart
+        localStorage.removeItem("kokanmewaCart");
+
+        document.getElementById("checkoutForm").style.display = "none";
+
+        document.getElementById("success").style.display = "block";
+
+        document.getElementById("orderNumber")
+            .textContent = "Your Order ID: " + orderId;
+
+    });
+
+</script>
+
+</body>
+</html>

@@ -350,6 +350,21 @@ function decreaseQty(productId){
     console.log(filterProducts);
     showProducts(filterProducts);
 }
+function buyNow() {
 
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+
+    // Save cart details
+    localStorage.setItem(
+        "kokanmewaCart",
+        JSON.stringify(cart)
+    );
+
+    // Open checkout page
+    window.location.href = "checkout.html";
+}
     
 
